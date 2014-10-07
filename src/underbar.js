@@ -209,6 +209,12 @@ var _ = {};
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    var my_iterator = iterator ? iterator : _.identity; //Handle missing iterator argument
+    //I'm not 100% clear on how this works but it does (or, at least my tests pass). I originally only negated my_iterator but then noticed all my outputs
+    //were the exact opposite of what I wanted, so I negated the containing _.every() call. I'll get back to this. 
+    return !_.every(collection, function (x) {
+        return !my_iterator(x);
+    });
   };
 
 
