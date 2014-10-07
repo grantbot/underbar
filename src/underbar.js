@@ -334,6 +334,17 @@ var _ = {};
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var array_copy = array.slice(); //Copy array
+
+    for (var i = array_copy.length - 1; i > 0; i --) { //Looping backwards simplifies rand_int generation
+        var rand_int = Math.floor(Math.random() * (i + 1)); //Mult by i + 1 because we're flooring it (need to include numbers b/w 2 and 3)
+
+        var temp = array_copy[i]; //Swap entries
+        array_copy[i] = array_copy[rand_int];
+        array_copy[rand_int] = temp;
+    }
+
+    return array_copy;
   };
 
 
