@@ -299,6 +299,16 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var prev_calls = {}; //Store all unique argument-->result pairs
+    return function(x) {
+        if (prev_calls.hasOwnProperty(x)) { //Check if function has already been called with those args
+            return prev_calls[x];
+        } else {
+            var result = func(x);
+            prev_calls[x] = result;
+            return result;
+        }
+    }
   };
 
   // Delays a function for the given number of milliseconds, and then calls
